@@ -62,3 +62,52 @@ productDisplayedImg.addEventListener("click", () => {
 
 	console.log(imgZoomModal);
 });
+0;
+
+// Menu event
+let opensMenu = (openBtn, menuEle) => {
+	openBtn.addEventListener("click", function () {
+		// console.log(openBtn.childNodes[1]);
+		let menuImg = openBtn.childNodes[1];
+		if (menuImg.classList.contains("openBtn")) {
+			menuImg.classList.add("closeBtn");
+			menuImg.classList.remove("openBtn");
+			menuEle.style.display = "flex";
+			menuImg.src = "./images/icon-close.svg";
+			closesModal(openBtn, menuEle);
+		}
+	});
+};
+
+let closesModal = (openBtn, menuEle) => {
+	// close with close btn
+	Close = () => {
+		menuEle.style.display = "none";
+		openBtn.removeEventListener("click", Close);
+		window.removeEventListener("keyup", escClose);
+		menuEle.removeEventListener("click", Close);
+		let closeImg = openBtn.childNodes[1];
+		if (closeImg.classList.contains("closeBtn")) {
+			closeImg.src = "./images/icon-menu.svg";
+			closeImg.classList.remove("closeBtn");
+			closeImg.classList.add("openBtn");
+		}
+		console.log("close");
+	};
+	openBtn.addEventListener("click", Close);
+
+	// close with escape key
+	escClose = (e) => {
+		if (e.key == "Escape") {
+			Close();
+		}
+	};
+	window.addEventListener("keyup", escClose);
+
+	// close with clicking outside the modal box
+};
+
+let menuBtn = document.querySelector(".menu-icon-div");
+let menuEle = document.querySelector("nav");
+
+opensMenu(menuBtn, menuEle);
