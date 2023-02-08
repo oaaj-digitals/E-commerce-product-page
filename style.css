@@ -412,6 +412,16 @@ main {
 	}
 
 	.order-div > * {
-		width: 100%;
+		width: 100% !important;
+	}
+
+	.amt-btn {
+		width: 6rem;
+	}
+
+	#order-amt,
+	#order-amt:focus-visible,
+	#order-amt:hover {
+		padding: 0 6.5rem;
 	}
 }
