@@ -64,6 +64,41 @@ productDisplayedImg.addEventListener("click", () => {
 });
 0;
 
+// Mobile Image change
+let previousImgBtn = document.querySelector(".prev-btn");
+let nextImgBtn = document.querySelector(".next-btn");
+let displayedImgNumber = productDisplayedImg.src[109];
+
+previousImgBtn.addEventListener("click", () => {
+	let productDisplayedImg = document.querySelector(".product-img");
+	let displayedImgNumber = productDisplayedImg.src[109];
+
+	let newDisplayedImage;
+
+	if (displayedImgNumber > 1) {
+		let newNum = parseInt(displayedImgNumber) - 1;
+		newDisplayedImage = `./images/image-product-${newNum}.jpg`;
+	} else {
+		newDisplayedImage = `./images/image-product-4.jpg`;
+	}
+	productDisplayedImg.src = newDisplayedImage;
+});
+
+nextImgBtn.addEventListener("click", () => {
+	let productDisplayedImg = document.querySelector(".product-img");
+	let displayedImgNumber = productDisplayedImg.src[109];
+
+	let newDisplayedImage;
+
+	if (displayedImgNumber < 4) {
+		let newNum = parseInt(displayedImgNumber) + 1;
+		newDisplayedImage = `./images/image-product-${newNum}.jpg`;
+	} else {
+		newDisplayedImage = `./images/image-product-1.jpg`;
+	}
+	productDisplayedImg.src = newDisplayedImage;
+});
+
 // Menu event
 let opensMenu = (openBtn, menuEle) => {
 	openBtn.addEventListener("click", function () {
@@ -103,8 +138,6 @@ let closesModal = (openBtn, menuEle) => {
 		}
 	};
 	window.addEventListener("keyup", escClose);
-
-	// close with clicking outside the modal box
 };
 
 let menuBtn = document.querySelector(".menu-icon-div");

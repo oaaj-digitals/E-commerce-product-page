@@ -153,6 +153,10 @@ main {
 	cursor: zoom-in;
 }
 
+.change-display-img {
+	display: none;
+}
+
 .product-thumbnails-div {
 	width: 100%;
 	display: flex;
@@ -425,6 +429,33 @@ main {
 		width: 100vw;
 		height: auto;
 		border-radius: 0;
+	}
+
+	.change-display-img {
+		background-color: hsl(223, 64%, 98%);
+		border-radius: 100%;
+		width: 5rem;
+		height: 5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		z-index: 400;
+		box-shadow: 0px 0px 10px 2px hsla(0, 0%, 0%, 0.4);
+		pointer-events: all;
+	}
+
+	.prev-btn {
+		/* content: url("./images/icon-previous.svg"); */
+		left: 0;
+	}
+
+	.next-btn {
+		/* content: url("./images/icon-next.svg"); */
+		right: 0;
 	}
 
 	.product-thumbnails-div {
