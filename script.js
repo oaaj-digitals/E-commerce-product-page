@@ -67,7 +67,7 @@ productDisplayedImg.addEventListener("click", () => {
 // Mobile Image change
 let previousImgBtn = document.querySelector(".prev-btn");
 let nextImgBtn = document.querySelector(".next-btn");
-let displayedImgNumber = productDisplayedImg.src[109];
+// let displayedImgNumber = productDisplayedImg.src[109];
 
 previousImgBtn.addEventListener("click", () => {
 	let productDisplayedImg = document.querySelector(".product-img");
