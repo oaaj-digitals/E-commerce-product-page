@@ -48,6 +48,7 @@ header {
 	height: 15vh;
 	display: flex;
 	justify-content: space-between;
+	background-color: hsl(0, 0%, 100%);
 	align-items: center;
 	flex-shrink: 0;
 	border-bottom: 1px solid hsl(219, 9%, 45%);
@@ -110,6 +111,110 @@ nav {
 
 .cart:hover {
 	fill: hsl(0, 0%, 0%) !important;
+}
+
+.cart-box {
+	display: none;
+	position: absolute;
+	top: 50px;
+	right: 50%;
+	width: 30vw;
+	z-index: 500;
+	background-color: hsl(0, 0%, 100%);
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.4);
+
+	/* display: flex; */
+	flex-direction: column;
+}
+
+.cart-box .cart-item {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.cart-item > .item-img {
+	height: 100%;
+	display: inline-block;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.cart-item > .item-img > img {
+	display: block;
+	height: 100%;
+}
+
+.cart-item > .item-info {
+	font-size: 1.6rem;
+	width: 70%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 0.6rem;
+	color: hsl(219, 9%, 45%);
+}
+
+.cart-item .item-name {
+	/* font-size: 1.6rem; */
+	font-weight: 700;
+}
+
+.item-value {
+	display: flex;
+	gap: 1rem;
+}
+
+.item-total-value {
+	color: hsl(0, 0%, 0%);
+	font-weight: 700;
+}
+
+.cart-box > .title {
+	font-size: 1.7rem;
+	font-weight: 700;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 2rem;
+	border-bottom: 0.5px solid hsl(219, 9%, 45%);
+}
+
+.cart-box > div {
+	padding: 2rem 2.5rem;
+	gap: 1.5rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.cart-box .cart-list {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+}
+
+.cart-box #checkout-btn {
+	padding: 1.5rem;
+	width: 100%;
+}
+
+.delete-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.delete-icon {
+	fill: #c3cad9 !important;
+}
+
+.delete-icon:hover {
+	fill: red !important;
 }
 
 .user {
@@ -290,7 +395,7 @@ main {
 	-webkit-appearance: none;
 }
 
-#add-order-btn {
+.orange-btn {
 	height: 100%;
 	width: 55%;
 	font-weight: 700;
@@ -307,7 +412,7 @@ main {
 	transition: all 0.5s ease-out;
 }
 
-#add-order-btn:hover {
+.orange-btn:hover {
 	opacity: 0.6;
 }
 
@@ -411,7 +516,24 @@ main {
 		font-size: 50%;
 	}
 
+	header {
+		padding: 0 5vw;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 2000;
+	}
+
+	.cart-box {
+		top: 16vh;
+		left: 50vw;
+		transform: translateX(-50%);
+		position: fixed;
+		width: 90vw;
+	}
+
 	main {
+		margin-top: 15vh;
 		height: auto;
 		flex-direction: column;
 	}

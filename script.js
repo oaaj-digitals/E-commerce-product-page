@@ -11,8 +11,8 @@ let incrementValue = (inputEle) => {
 
 let decrementValue = (inputEle) => {
 	// inputEle.value = parseInt(inputEle.value) - 1;
-	if (inputEle.value <= 0) {
-		inputEle.value = 0;
+	if (inputEle.value <= 1) {
+		inputEle.value = 1;
 	} else {
 		inputEle.value = parseInt(inputEle.value) - 1;
 	}
@@ -109,6 +109,10 @@ let opensMenu = (openBtn, menuEle) => {
 			menuImg.classList.remove("openBtn");
 			menuEle.style.display = "flex";
 			menuImg.src = "./images/icon-close.svg";
+
+			openBtn.style.position = "fixed";
+			openBtn.style.top = "";
+			openBtn.style.left = "5vw";
 			closesModal(openBtn, menuEle);
 		}
 	});
@@ -126,6 +130,8 @@ let closesModal = (openBtn, menuEle) => {
 			closeImg.src = "./images/icon-menu.svg";
 			closeImg.classList.remove("closeBtn");
 			closeImg.classList.add("openBtn");
+
+			openBtn.style.position = "static";
 		}
 		console.log("close");
 	};
@@ -144,3 +150,108 @@ let menuBtn = document.querySelector(".menu-icon-div");
 let menuEle = document.querySelector("nav");
 
 opensMenu(menuBtn, menuEle);
+
+// Cart Events
+// localStorage.removeItem("cart");
+
+let cartBtn = document.querySelector(".cart-div>svg");
+let cartBox = document.querySelector(".cart-box");
+
+const cartDelete = (cartItem) => {
+	localStorage.removeItem("cart");
+	cartItem.innerHTML = "";
+};
+
+const carting = () => {
+	let cart = localStorage.cart ? localStorage.cart.split(",") : null;
+
+	if (cart) {
+		let cartItem = document.querySelector(".cart-item");
+		cartItem.innerHTML = `
+		<div class="item-img">
+			<img src="./images/image-product-1-thumbnail.jpg" />
+		</div>
+		<div class="item-info">
+			<p class="item-name">${cart[0]}</p>
+			<p class="item-value">
+				<span class="item-price">$${cart[1]}</span>
+				x
+				<span class="item-qty">${cart[2]}</span>
+				<span class="item-total-value">$${parseInt(cart[1]) * parseInt(cart[2])}</span>
+			</p>
+		</div>
+
+		<div class="delete-btn btn">
+			<svg class="icon delete-icon"
+				width="14"
+				height="16"
+				xmlns="http://www.w3.org/2000/svg"
+											xmlns:xlink="http://www.w3.org/1999/xlink"
+										>
+											<path
+												d="M0 2.625V1.75C0 1.334.334 1 .75 1h3.5l.294-.584A.741.741 0 0 1 5.213 0h3.571a.75.75 0 0 1 .672.416L9.75 1h3.5c.416 0 .75.334.75.75v.875a.376.376 0 0 1-.375.375H.375A.376.376 0 0 1 0 2.625Zm13 1.75V14.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 14.5V4.375C1 4.169 1.169 4 1.375 4h11.25c.206 0 .375.169.375.375ZM4.5 6.5c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Z"
+												id="a"
+												fill-rule="nonzero"
+											/>
+											<!-- <use
+												
+											/> -->
+										</svg>
+									</div>
+	`;
+
+		let cartDeleteBtn = document.querySelector(".delete-icon");
+		cartDeleteBtn.addEventListener("click", () => {
+			cartDelete(cartItem);
+		});
+
+		const checkOutBtn = document.querySelector("#checkout-btn");
+
+		checkOutBtn.addEventListener("click", () => {
+			cartDelete(cartItem);
+		});
+	}
+};
+
+carting();
+
+// Cart Button
+cartBtn.addEventListener("click", () => {
+	if (cartBox.classList.contains("closed")) {
+		cartBox.classList.remove("closed");
+		cartBox.classList.add("opened");
+		cartBox.style.display = "flex";
+	} else if (cartBox.classList.contains("opened")) {
+		cartBox.classList.add("closed");
+		cartBox.classList.remove("open");
+		cartBox.style.display = "none";
+	}
+	// console.log(cartBox);
+});
+
+//Add to Cart Event
+let addToCartBtn = document.querySelector("#add-order-btn");
+
+addToCartBtn.addEventListener("click", () => {
+	let qty = document.querySelector("#order-amt").value;
+	let unitPrice = 125;
+	let productName = document.querySelector(".product-name").textContent;
+
+	let product = [productName, unitPrice, qty];
+
+	if (localStorage.cart) {
+		// console.log(localStorage.cart);
+		let cart = localStorage.cart.split(",");
+		let prevQty = parseInt(cart[2]);
+		let newQty = prevQty + parseInt(qty);
+		product = [productName, unitPrice, newQty];
+
+		localStorage.setItem("cart", product);
+	} else {
+		localStorage.setItem("cart", product);
+	}
+
+	carting();
+
+	// console.log(localStorage.getItem("cart"));
+});
